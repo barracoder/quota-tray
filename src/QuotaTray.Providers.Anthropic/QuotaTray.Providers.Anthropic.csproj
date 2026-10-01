@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Anthropic usage providers for quota-tray: Claude subscription limits and Console spend.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../QuotaTray.Core/QuotaTray.Core.csproj" />
+  </ItemGroup>
+</Project>

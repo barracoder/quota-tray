@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Provider contract, configuration and polling for quota-tray.</Description>
+  </PropertyGroup>
+</Project>

@@ -7,17 +7,7 @@ left, and the colour (blue / amber / red / grey) is how worried you should be. C
 per provider and per window (5-hour session, weekly, per-model weekly, month-to-date spend), when each
 resets, and the usual Refresh / Open config / Quit.
 
-```mermaid
-flowchart LR
-    cfg[("config.json")] --> reg[ProviderRegistry]
-    env[/"env vars / Keychain"/] -.-> sec[SecretResolver]
-    sec --> p1 & p2 & pn
-    reg --> p1["claude-subscription"] & p2["anthropic-cost"] & pn["your provider…"]
-    p1 & p2 & pn --> poll[UsagePoller]
-    poll -->|"UsageSnapshot[]"| sev[SeverityRules]
-    sev -->|"most-constrained window + colour"| icon(("ring icon"))
-    sev --> menu["tray menu\n(all windows, reset times, errors)"]
-```
+<p align="center"><img src="docs/images/menu-macos.png" width="436" alt="quota-tray in the macOS menu bar: ring icon, and the open menu listing Claude session, weekly and per-model limits with reset times"></p>
 
 Out of the box it reads your **Claude Pro/Max** limits using the login Claude Code already has
 on the machine — no setup. Add an Admin API key and it will also track **Claude Developer Platform**

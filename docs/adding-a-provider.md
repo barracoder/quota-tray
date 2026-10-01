@@ -4,6 +4,18 @@ A provider turns "some API that knows how much of something you have used" into 
 `QuotaWindow`s. Everything else — polling, error handling, the icon, the menu, secret lookup —
 is shared.
 
+```mermaid
+flowchart LR
+    cfg[("config.json")] --> reg[ProviderRegistry]
+    env[/"env vars / Keychain"/] -.-> sec[SecretResolver]
+    sec --> p1 & p2 & pn
+    reg --> p1["claude-subscription"] & p2["anthropic-cost"] & pn["your provider…"]
+    p1 & p2 & pn --> poll[UsagePoller]
+    poll -->|"UsageSnapshot[]"| sev[SeverityRules]
+    sev -->|"most-constrained window + colour"| icon(("ring icon"))
+    sev --> menu["tray menu\n(all windows, reset times, errors)"]
+```
+
 ## 1. Pick a project
 
 Providers for one vendor live together: `src/QuotaTray.Providers.<Vendor>/`. Create a new class

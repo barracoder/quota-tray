@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>GitHub usage providers for quota-tray: Copilot premium-request allowance (beta).</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../QuotaTray.Core/QuotaTray.Core.csproj" />
+  </ItemGroup>
+</Project>

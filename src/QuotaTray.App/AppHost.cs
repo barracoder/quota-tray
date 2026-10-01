@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using QuotaTray.Core;
 using QuotaTray.Providers.Anthropic;
+using QuotaTray.Providers.GitHub;
 
 namespace QuotaTray.App;
 
@@ -38,7 +39,8 @@ public sealed class AppHost : IDisposable
     {
         var registry = new ProviderRegistry()
             .Register(new ClaudeSubscriptionProviderFactory())
-            .Register(new AnthropicCostProviderFactory());
+            .Register(new AnthropicCostProviderFactory())
+            .Register(new GitHubCopilotProviderFactory());
 
         var http = new HttpClient(new SocketsHttpHandler
         {

@@ -54,6 +54,22 @@ public class RegistryAndPollerTests
     }
 
     [Fact]
+    public void Beta_factories_get_a_beta_suffix_on_the_display_name()
+    {
+        var registry = new ProviderRegistry().Register(new StubFactory("stub")).Register(new StubFactory("exp", isBeta: true));
+        var config = new AppConfig
+        {
+            Providers = [new ProviderConfig { Type = "stub", Name = "Stable" }, new ProviderConfig { Type = "exp", Name = "Edgy" }],
+        };
+
+        var providers = registry.Build(config, Context);
+
+        Assert.Equal("Stable", providers[0].DisplayName);
+        Assert.Equal("Edgy (beta)", providers[1].DisplayName);
+        Assert.Equal("edgy", providers[1].Id);
+    }
+
+    [Fact]
     public void Registering_the_same_type_twice_throws()
     {
         var registry = new ProviderRegistry().Register(new StubFactory("stub"));
@@ -90,11 +106,12 @@ public class RegistryAndPollerTests
         Assert.Throws<ArgumentOutOfRangeException>(() => new UsagePoller([], TimeSpan.Zero));
     }
 
-    private sealed class StubFactory(string type, bool throwOnCreate = false) : IUsageProviderFactory
+    private sealed class StubFactory(string type, bool throwOnCreate = false, bool isBeta = false) : IUsageProviderFactory
     {
         public string Type => type;
         public string Description => "stub";
         public string? DefaultApiKeyEnvironmentVariable => null;
+        public bool IsBeta => isBeta;
         public IUsageProvider Create(ProviderConfig config, ProviderContext context) =>
             throwOnCreate ? throw new InvalidOperationException("bad settings") : new DelegateProvider("inner", _ => throw new NotSupportedException());
     }

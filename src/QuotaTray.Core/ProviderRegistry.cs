@@ -38,13 +38,14 @@ public sealed class ProviderRegistry
                 continue;
             }
 
+            var displayName = factory.IsBeta ? entry.EffectiveName + " (beta)" : entry.EffectiveName;
             try
             {
-                providers.Add(new NamedProvider(id, entry.EffectiveName, factory.Create(entry, context)));
+                providers.Add(new NamedProvider(id, displayName, factory.Create(entry, context)));
             }
             catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or FormatException)
             {
-                providers.Add(new MisconfiguredProvider(id, entry.EffectiveName, ex.Message));
+                providers.Add(new MisconfiguredProvider(id, displayName, ex.Message));
             }
         }
 

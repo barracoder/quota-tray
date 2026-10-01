@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="../QuotaTray.Core/QuotaTray.Core.csproj" />
     <ProjectReference Include="../QuotaTray.Providers.Anthropic/QuotaTray.Providers.Anthropic.csproj" />
+    <ProjectReference Include="../QuotaTray.Providers.GitHub/QuotaTray.Providers.GitHub.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Include="macos/Info.plist" />

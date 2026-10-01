@@ -1,0 +1,12 @@
+{
+  "id": 1, "login": "octocat", "access_type_sku": "monthly_subscriber_quota", "copilot_plan": "individual",
+  "chat_enabled": true, "cli_enabled": true, "can_upgrade_plan": true,
+  "quota_reset_date": "2026-11-01",
+  "quota_snapshots": {
+    "chat": { "overage_count": 0, "overage_permitted": false, "percent_remaining": 100.0, "quota_id": "chat", "quota_remaining": 0.0, "unlimited": true, "has_quota": true, "remaining": 0, "entitlement": 0 },
+    "completions": { "overage_count": 0, "overage_permitted": false, "percent_remaining": 100.0, "quota_id": "completions", "quota_remaining": 0.0, "unlimited": true, "has_quota": true, "remaining": 0, "entitlement": 0 },
+    "premium_interactions": { "overage_count": 0, "overage_permitted": true, "percent_remaining": 100.0, "quota_id": "premium_interactions", "quota_remaining": 1500.0, "unlimited": false, "has_quota": true, "overage_entitlement": 10000, "remaining": 1500, "entitlement": 1500 }
+  },
+  "quota_reset_date_utc": "2026-11-01T00:00:00.000Z",
+  "token_based_billing": true
+}

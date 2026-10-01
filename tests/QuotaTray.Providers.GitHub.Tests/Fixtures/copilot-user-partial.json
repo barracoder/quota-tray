@@ -1,0 +1,8 @@
+{
+  "login": "octocat", "copilot_plan": "business", "quota_reset_date": "2026-11-01",
+  "quota_snapshots": {
+    "premium_interactions": { "overage_count": 12, "overage_permitted": true, "percent_remaining": 0.0, "unlimited": false, "has_quota": true, "remaining": 0, "entitlement": 300 },
+    "completions": { "unlimited": false, "has_quota": true, "remaining": 1500, "entitlement": 2000 },
+    "mystery_quota": { "unlimited": false, "has_quota": false, "remaining": 1, "entitlement": 1 }
+  }
+}

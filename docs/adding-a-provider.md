@@ -8,9 +8,9 @@ is shared.
 flowchart LR
     cfg[("config.json")] --> reg[ProviderRegistry]
     env[/"env vars / Keychain"/] -.-> sec[SecretResolver]
-    sec --> p1 & p2 & pn
-    reg --> p1["claude-subscription"] & p2["anthropic-cost"] & pn["your provider…"]
-    p1 & p2 & pn --> poll[UsagePoller]
+    sec --> p1 & p2 & p3 & pn
+    reg --> p1["claude-subscription"] & p2["anthropic-cost"] & p3["github-copilot (beta)"] & pn["your provider…"]
+    p1 & p2 & p3 & pn --> poll[UsagePoller]
     poll -->|"UsageSnapshot[]"| sev[SeverityRules]
     sev -->|"most-constrained window + colour"| icon(("ring icon"))
     sev --> menu["tray menu\n(all windows, reset times, errors)"]
@@ -31,11 +31,16 @@ public sealed class AcmeProviderFactory : IUsageProviderFactory
     public string Type => "acme";                       // what users put in "type"
     public string Description => "Acme API credits remaining this billing period.";
     public string? DefaultApiKeyEnvironmentVariable => "ACME_API_KEY";
+    public bool IsBeta => true;   // optional; default false. Appends "(beta)" to the menu name.
 
     public IUsageProvider Create(ProviderConfig config, ProviderContext context) =>
         new AcmeProvider(config, context);
 }
 ```
+
+Set `IsBeta` when the upstream API is undocumented or you have not seen it hold steady for a while.
+`github-copilot` and `claude-subscription` both talk to internal endpoints; Copilot is marked beta
+because it is newer here, Claude is not because the shape has been stable and it ships as the default.
 
 `Create` runs once at startup and after **Reload config**. Validate provider-specific settings here
 and throw `InvalidOperationException` with a message a human can act on — the registry turns it
@@ -95,7 +100,7 @@ var registry = new ProviderRegistry()
 
 ## 5. Test it
 
-Copy the pattern in `tests/QuotaTray.Providers.Anthropic.Tests`: a `FakeHttpMessageHandler` that
+Copy the pattern in `tests/QuotaTray.Providers.GitHub.Tests` (the smallest one): a `FakeHttpMessageHandler` that
 replays a captured response and records the request, and a `FixedClock`. Assert on the exact URL
 and headers you send (that is where provider bugs live) and on the mapped windows. Put a real,
 redacted response in `Fixtures/`.

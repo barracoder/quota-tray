@@ -4,6 +4,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotaTray.Core", "src\Quota
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotaTray.Providers.Anthropic", "src\QuotaTray.Providers.Anthropic\QuotaTray.Providers.Anthropic.csproj", "{A1000000-0000-4000-8000-000000000002}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotaTray.Providers.GitHub", "src\QuotaTray.Providers.GitHub\QuotaTray.Providers.GitHub.csproj", "{A1000000-0000-4000-8000-000000000006}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotaTray.Providers.GitHub.Tests", "tests\QuotaTray.Providers.GitHub.Tests\QuotaTray.Providers.GitHub.Tests.csproj", "{A1000000-0000-4000-8000-000000000007}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotaTray.App", "src\QuotaTray.App\QuotaTray.App.csproj", "{A1000000-0000-4000-8000-000000000003}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotaTray.Core.Tests", "tests\QuotaTray.Core.Tests\QuotaTray.Core.Tests.csproj", "{A1000000-0000-4000-8000-000000000004}"
@@ -36,5 +40,13 @@ Global
 		{A1000000-0000-4000-8000-000000000005}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1000000-0000-4000-8000-000000000005}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1000000-0000-4000-8000-000000000005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1000000-0000-4000-8000-000000000006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1000000-0000-4000-8000-000000000006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1000000-0000-4000-8000-000000000006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1000000-0000-4000-8000-000000000006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1000000-0000-4000-8000-000000000007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1000000-0000-4000-8000-000000000007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1000000-0000-4000-8000-000000000007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1000000-0000-4000-8000-000000000007}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -37,6 +37,12 @@ public interface IUsageProviderFactory
     /// </summary>
     string? DefaultApiKeyEnvironmentVariable { get; }
 
+    /// <summary>
+    /// True when the provider relies on an undocumented or unstable upstream API. The registry
+    /// appends "(beta)" to the display name so users know which numbers to trust less.
+    /// </summary>
+    bool IsBeta => false;
+
     IUsageProvider Create(ProviderConfig config, ProviderContext context);
 }
 

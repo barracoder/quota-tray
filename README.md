@@ -2,14 +2,22 @@
 
 A small gauge in the macOS menu bar / Windows system tray showing how much of your AI quota is **left**.
 
-```
- ┌────┐
- │ 94 │  ← ring = headroom remaining, number = percent left, colour = how worried you should be
- └────┘
-```
+The icon is a ring: the filled arc is the headroom remaining, the number in the middle is the percent
+left, and the colour (blue / amber / red / grey) is how worried you should be. Click it for a breakdown
+per provider and per window (5-hour session, weekly, per-model weekly, month-to-date spend), when each
+resets, and the usual Refresh / Open config / Quit.
 
-Click it for a breakdown per provider and per window (5-hour session, weekly, per-model weekly,
-month-to-date spend), when each resets, and the usual Refresh / Open config / Quit.
+```mermaid
+flowchart LR
+    cfg[("config.json")] --> reg[ProviderRegistry]
+    env[/"env vars / Keychain"/] -.-> sec[SecretResolver]
+    sec --> p1 & p2 & pn
+    reg --> p1["claude-subscription"] & p2["anthropic-cost"] & pn["your provider…"]
+    p1 & p2 & pn --> poll[UsagePoller]
+    poll -->|"UsageSnapshot[]"| sev[SeverityRules]
+    sev -->|"most-constrained window + colour"| icon(("ring icon"))
+    sev --> menu["tray menu\n(all windows, reset times, errors)"]
+```
 
 Out of the box it reads your **Claude Pro/Max** limits using the login Claude Code already has
 on the machine — no setup. Add an Admin API key and it will also track **Claude Developer Platform**

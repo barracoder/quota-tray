@@ -48,6 +48,7 @@ public class ConfigStoreTests : IDisposable
         var saved = doc.RootElement.GetProperty("providers")[0];
         Assert.Equal(250.5, saved.GetProperty("monthlyBudgetUsd").GetDouble());
         Assert.False(saved.TryGetProperty("apiKey", out _), "null fields should not be written");
+        Assert.False(saved.TryGetProperty("effectiveName", out _), "computed properties should not be written");
     }
 
     [Fact]

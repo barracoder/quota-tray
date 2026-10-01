@@ -60,6 +60,7 @@ public sealed class ProviderConfig
             ? el.GetBoolean()
             : null;
 
+    [JsonIgnore]
     public string EffectiveName => string.IsNullOrWhiteSpace(Name) ? Type : Name;
 }
 

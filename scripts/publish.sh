@@ -24,6 +24,7 @@ if [[ "$RID" == osx-* ]]; then
   APP="$OUT/QuotaTray.app"
   mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
   cp -R "$OUT/publish/." "$APP/Contents/MacOS/"
+  cp src/QuotaTray.App/assets/QuotaTray.icns "$APP/Contents/Resources/"
   sed "s/__VERSION__/$VERSION/g" src/QuotaTray.App/macos/Info.plist > "$APP/Contents/Info.plist"
   # Ad-hoc signature so Gatekeeper lets a right-click → Open through. Replace '-' with a Developer ID for notarisation.
   codesign --force --deep --sign - "$APP"

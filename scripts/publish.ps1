@@ -23,6 +23,7 @@ if ($Rid -like 'osx-*') {
   $app = "$out/QuotaTray.app"
   New-Item -ItemType Directory -Force -Path "$app/Contents/MacOS", "$app/Contents/Resources" | Out-Null
   Copy-Item "$out/publish/*" "$app/Contents/MacOS/" -Recurse -Force
+  Copy-Item src/QuotaTray.App/assets/QuotaTray.icns "$app/Contents/Resources/"
   (Get-Content src/QuotaTray.App/macos/Info.plist -Raw).Replace('__VERSION__', $version) | Set-Content "$app/Contents/Info.plist" -NoNewline
   if ($IsMacOS) {
     codesign --force --deep --sign - $app

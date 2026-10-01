@@ -17,7 +17,7 @@
   <key>CFBundleExecutable</key>
   <string>QuotaTray</string>
   <key>CFBundleIconFile</key>
-  <string></string>
+  <string>QuotaTray</string>
   <key>LSMinimumSystemVersion</key>
   <string>12.0</string>
   <key>LSUIElement</key>

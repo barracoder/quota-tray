@@ -4,6 +4,7 @@
     <AssemblyName>QuotaTray</AssemblyName>
     <RootNamespace>QuotaTray.App</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>assets/quota-tray.ico</ApplicationIcon>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <InvariantGlobalization>true</InvariantGlobalization>
     <SelfContained>true</SelfContained>
@@ -21,5 +22,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="macos/Info.plist" />
+    <None Include="assets/**" />
   </ItemGroup>
 </Project>

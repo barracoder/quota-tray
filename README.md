@@ -15,14 +15,15 @@ spend against a monthly budget. Other APIs plug in as providers (see below).
 
 ## Install
 
-Grab a zip for your platform from [Releases](https://github.com/barracoder/quota-tray/releases).
+Download from [Releases](https://github.com/barracoder/quota-tray/releases). Each release has an installer and a portable zip per platform.
 
-| Platform | Steps |
-| --- | --- |
-| macOS (Apple Silicon / Intel) | Unzip, drag `QuotaTray.app` to Applications. It is ad-hoc signed, so the first launch is right-click → **Open**. Add to *System Settings → General → Login Items* to start at login. |
-| Windows (x64 / ARM64) | Unzip anywhere, run `QuotaTray.exe`. To start at login, drop a shortcut in `shell:startup`. |
+| Platform | Installer | What it does |
+| --- | --- | --- |
+| macOS (Apple Silicon / Intel) | `quota-tray-osx-arm64.dmg` / `quota-tray-osx-x64.dmg` | Open, drag `QuotaTray` to the Applications shortcut. The app is ad-hoc signed, so the first launch is right-click → **Open** (or *System Settings → Privacy & Security → Open Anyway* on macOS 15+). To start at login, add it under *System Settings → General → Login Items*. |
+| Windows (x64 / ARM64) | `quota-tray-win-x64-setup.exe` / `quota-tray-win-arm64-setup.exe` | Per-user install into `%LOCALAPPDATA%\Programs\QuotaTray`, no admin rights. Adds a Start Menu entry and an uninstaller; tick **Start QuotaTray when I sign in** during setup if you want it on login. The installer is unsigned, so SmartScreen will ask once: *More info → Run anyway*. |
+| Portable | `quota-tray-<rid>.zip` | Unzip and run. macOS zips contain the `.app`; Windows zips contain `QuotaTray.exe` and its native libraries. |
 
-No installer, no admin rights, nothing written outside your user profile.
+Nothing is written outside your user profile.
 
 ## Configuration
 
@@ -122,12 +123,15 @@ Requires the .NET 10 SDK. Scripts exist in both bash and PowerShell and do the s
 scripts/build.sh            # restore, build, test
 scripts/publish.sh          # self-contained build for this machine → artifacts/<rid>/ (+ .app on macOS)
 scripts/publish.sh win-x64  # or any RID: win-arm64, osx-arm64, osx-x64
+scripts/package.sh          # installer for this machine: .dmg (macOS, hdiutil) or -setup.exe (Windows, Inno Setup 6)
+scripts/make-icons.py       # regenerate the icon assets (needs Pillow); outputs are committed
 dotnet run --project src/QuotaTray.App
 ```
 
 ```powershell
 scripts/build.ps1
 scripts/publish.ps1 -Rid win-x64
+scripts/package.ps1 -Rid win-x64
 ```
 
 Layout:
@@ -135,7 +139,8 @@ Layout:
 ```
 src/QuotaTray.Core                 contract, config, secret resolution, polling, severity
 src/QuotaTray.Providers.Anthropic  claude-subscription, anthropic-cost
-src/QuotaTray.App                  Avalonia tray app: icon renderer, menu, composition root
+src/QuotaTray.App                  Avalonia tray app: icon renderer, menu, composition root, icon assets, Info.plist
+installer/windows                  Inno Setup script (per-user, no admin)
 tests/                             xUnit; HTTP is faked, fixtures are real captured payloads
 ```
 
@@ -144,7 +149,7 @@ Two macOS rules learned the hard way, both documented in `TrayController`: never
 (menu items, icons) per refresh — they are released from the finalizer thread and AppKit crashes.
 Menu items are a fixed pool updated in place; icons are cached.
 
-CI builds, tests and publishes win-x64, win-arm64, osx-arm64 and osx-x64 on every push; a `v*` tag creates a GitHub release with the zips attached.
+CI builds, tests, publishes and packages win-x64, win-arm64, osx-arm64 and osx-x64 on every push; a `v*` tag creates a GitHub release with the installers and zips attached. Neither installer is code-signed; see [Installers](#install) for what that means for users.
 
 ## License
 

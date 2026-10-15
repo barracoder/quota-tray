@@ -13,8 +13,8 @@
     <Description>Menu bar / system tray gauge for remaining AI quota.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="12.1.3" />
-    <PackageReference Include="Avalonia.Desktop" Version="12.1.3" />
+    <PackageReference Include="Avalonia" Version="12.1.4" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../QuotaTray.Core/QuotaTray.Core.csproj" />
